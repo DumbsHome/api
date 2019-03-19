@@ -2,8 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\Device;
 use App\Entity\Log;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -19,32 +22,28 @@ class LogRepository extends ServiceEntityRepository
         parent::__construct($registry, Log::class);
     }
 
-    // /**
-    //  * @return Log[] Returns an array of Log objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @param User $user
+     * @return Log[]
+     */
+    public function findByUser(User $user)
     {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+        return $this
+            ->createQueryBuilder('l')
+            ->leftJoin(
+                Device::class,
+                'd',
+                Join::WITH,
+                'l.device = d.id'
+            )
+            ->leftJoin(
+                User::class,
+                'u',
+                Join::WITH,
+                'd.user = :user_id'
+            )
+            ->setParameter('user_id', $user->getId())
             ->getQuery()
-            ->getResult()
-        ;
+            ->execute();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Log
-    {
-        return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
