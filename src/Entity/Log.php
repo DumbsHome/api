@@ -34,20 +34,10 @@ class Log
     private $value;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Log", inversedBy="logs")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Device", inversedBy="logs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $device;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Log", mappedBy="device", orphanRemoval=true)
-     */
-    private $logs;
-
-    public function __construct()
-    {
-        $this->logs = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -90,45 +80,14 @@ class Log
         return $this;
     }
 
-    public function getDevice(): ?self
+    public function getDevice(): ?Device
     {
         return $this->device;
     }
 
-    public function setDevice(?self $device): self
+    public function setDevice(?Device $device): self
     {
         $this->device = $device;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|self[]
-     */
-    public function getLogs(): Collection
-    {
-        return $this->logs;
-    }
-
-    public function addLog(self $log): self
-    {
-        if (!$this->logs->contains($log)) {
-            $this->logs[] = $log;
-            $log->setDevice($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLog(self $log): self
-    {
-        if ($this->logs->contains($log)) {
-            $this->logs->removeElement($log);
-            // set the owning side to null (unless already changed)
-            if ($log->getDevice() === $this) {
-                $log->setDevice(null);
-            }
-        }
 
         return $this;
     }
