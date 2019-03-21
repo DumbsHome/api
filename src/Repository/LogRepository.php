@@ -24,9 +24,10 @@ class LogRepository extends ServiceEntityRepository
 
     /**
      * @param User $user
+     * @param int $limit
      * @return Log[]
      */
-    public function findByUser(User $user)
+    public function findByUser(User $user, $limit = 10)
     {
         return $this
             ->createQueryBuilder('l')
@@ -43,6 +44,7 @@ class LogRepository extends ServiceEntityRepository
                 'd.user = :user_id'
             )
             ->setParameter('user_id', $user->getId())
+            ->setMaxResults($limit)
             ->getQuery()
             ->execute();
     }

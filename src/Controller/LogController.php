@@ -70,7 +70,7 @@ class LogController extends AbstractController
 
         $limit = $request->query->get('limit') ?? 10;
 
-        $logs = $logRepo->findByUser($this->getUser());
+        $logs = $logRepo->findByUser($this->getUser(), $limit);
 
         $response = [];
 
