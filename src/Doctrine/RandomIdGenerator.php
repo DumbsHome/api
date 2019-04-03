@@ -11,12 +11,21 @@ class RandomIdGenerator extends AbstractIdGenerator
     {
         $entity_name = $em->getClassMetadata(get_class($entity))->getName();
 
+        $max_attempt = 99;
+        $attempt = 0;
+        $length = 48;
+
         while (true) {
-            $id = $this->generateRandomString(48);
+            $id = $this->generateRandomString($length);
             $item = $em->find($entity_name, $id);
 
             if (!$item) {
                 return $id;
+            }
+
+            $attempt++;
+            if ($attempt > $max_attempt) {
+                throw new \Exception('Hard to believe, but after ' . $attempt . ' attempts RandomIdGenerator still failed to return an unique id');
             }
         }
     }
