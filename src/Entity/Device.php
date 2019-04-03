@@ -55,11 +55,13 @@ class Device
 
     /**
      * @param mixed $place
+     *
      * @return Device
      */
     public function setPlace($place): self
     {
         $this->place = $place;
+
         return $this;
     }
 

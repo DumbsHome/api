@@ -24,7 +24,8 @@ class LogRepository extends ServiceEntityRepository
 
     /**
      * @param User $user
-     * @param int $limit
+     * @param int  $limit
+     *
      * @return Log[]
      */
     public function findByUser(User $user, $limit = 10)

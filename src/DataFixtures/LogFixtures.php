@@ -3,7 +3,6 @@
 
 namespace App\DataFixtures;
 
-
 use App\Entity\Device;
 use App\Entity\Log;
 use App\Entity\User;
@@ -26,7 +25,7 @@ class LogFixtures extends Fixture
         while ($deviceCounter <= $this->MAX_DEVICE) {
             $device = new Device();
             $device->setUser($user);
-            $device->setPlace('Device ' . $deviceCounter);
+            $device->setPlace('Device '.$deviceCounter);
             $manager->persist($device);
             $manager->flush();
 
@@ -39,7 +38,7 @@ class LogFixtures extends Fixture
                 $log->setType('t');
                 $log->setValue(random_int(-12, 32));
 
-                $dt->add(new \DateInterval('PT' . $this->SEC_BETWEEN_EACH_LOG . 'S'));
+                $dt->add(new \DateInterval('PT'.$this->SEC_BETWEEN_EACH_LOG.'S'));
                 $logCounter++;
                 $manager->persist($log);
                 $manager->flush();
@@ -49,5 +48,4 @@ class LogFixtures extends Fixture
         }
         $manager->flush();
     }
-
 }
