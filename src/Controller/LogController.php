@@ -21,7 +21,9 @@ class LogController extends AbstractController
      * @Route("/new", name="log_new", methods={"POST"})
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
+     *
      * @throws \Exception
      */
     public function newAction(Request $request)
@@ -37,9 +39,7 @@ class LogController extends AbstractController
         );
 
         if ($device === null) {
-            throw new BadRequestHttpException("Device with id "
-                . $request->request->get('device_id')
-                . " does not exist");
+            throw new BadRequestHttpException("Device with id ".$request->request->get('device_id')." does not exist");
         }
 
         $log = new Log;
@@ -61,6 +61,7 @@ class LogController extends AbstractController
      * @Route("/", name="log_get", methods={"GET"})
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function getAction(Request $request)
@@ -90,7 +91,8 @@ class LogController extends AbstractController
      * @Route("/bydevice/{device}", name="log_get_by_device", methods={"GET"})
      *
      * @param Request $request
-     * @param Device $device
+     * @param Device  $device
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function getByDeviceAction(Request $request, Device $device)

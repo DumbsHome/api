@@ -25,7 +25,7 @@ class RandomIdGenerator extends AbstractIdGenerator
 
             $attempt++;
             if ($attempt > $max_attempt) {
-                throw new \Exception('Hard to believe, but after ' . $attempt . ' attempts RandomIdGenerator still failed to return an unique id');
+                throw new \Exception('Hard to believe, but after '.$attempt.' attempts RandomIdGenerator still failed to return an unique id');
             }
         }
     }
@@ -34,6 +34,7 @@ class RandomIdGenerator extends AbstractIdGenerator
      * Returns a random string of the given length
      *
      * @param int $length Length of the string (default: 10 characters)
+     *
      * @return string
      */
     private function generateRandomString($length = 10)
@@ -44,6 +45,7 @@ class RandomIdGenerator extends AbstractIdGenerator
         for ($i = 0; $i < $length; $i++) {
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         }
+
         return $randomString;
     }
 }

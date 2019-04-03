@@ -20,6 +20,7 @@ class DeviceController extends AbstractController
      * @Route("/new", name="device_new", methods={"POST"})
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function newAction(Request $request)
@@ -46,6 +47,7 @@ class DeviceController extends AbstractController
      * @Route("/")
      *
      * @param Request $request
+     *
      * @return \Symfony\Component\HttpFoundation\JsonResponse
      */
     public function getAction(Request $request)
